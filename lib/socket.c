@@ -18,6 +18,18 @@
 #include "config.h"
 #endif
 
+#if defined(_WIN32)
+#include "win32/win32_compat.h"
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#else
+#include <strings.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+#include <sys/ioctl.h>
+#endif
+
 #ifdef HAVE_SYS_TYPES_H
 #include <sys/types.h>
 #endif
@@ -40,18 +52,6 @@
 
 #ifdef HAVE_SYS_SOCKET_H
 #include <sys/socket.h>
-#endif
-
-#if defined(_WIN32)
-#include <winsock2.h>
-#include <ws2tcpip.h>
-#include "win32/win32_compat.h"
-#else
-#include <strings.h>
-#include <netdb.h>
-#include <netinet/in.h>
-#include <netinet/tcp.h>
-#include <sys/ioctl.h>
 #endif
 
 #ifdef NEED_SYS_FILIO_H

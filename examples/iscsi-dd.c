@@ -15,12 +15,24 @@
    along with this program; if not, see <http://www.gnu.org/licenses/>.
 */
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
+#if defined(_WIN32)
+#include "win32/win32_compat.h"
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <inttypes.h>
 #include <string.h>
+
+#ifdef HAVE_POLL_H
 #include <poll.h>
+#endif
+
 #include <getopt.h>
 #include <unistd.h>
 #include <limits.h>

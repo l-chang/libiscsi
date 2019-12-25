@@ -19,8 +19,8 @@
 #endif
 
 #if defined(_WIN32)
+#include "win32/win32_compat.h"
 #include <winsock2.h>
-#include "win32_compat.h"
 #pragma comment(lib, "ws2_32.lib")
 WSADATA wsaData;
 #endif

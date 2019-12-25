@@ -18,6 +18,10 @@
 #include "config.h"
 #endif
 
+#if defined(_WIN32)
+#include "win32/win32_compat.h"
+#endif
+
 #ifdef HAVE_SYS_TYPES_H
 #include <sys/types.h>
 #endif
@@ -28,10 +32,6 @@
 
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
-#endif
-
-#if defined(_WIN32)
-#include "win32/win32_compat.h"
 #endif
 
 #include <stdio.h>

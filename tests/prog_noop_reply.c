@@ -18,6 +18,10 @@
 #include "config.h"
 #endif
 
+#if defined(_WIN32)
+#include "win32/win32_compat.h"
+#endif
+
 #ifdef HAVE_POLL_H
 #include <poll.h>
 #endif

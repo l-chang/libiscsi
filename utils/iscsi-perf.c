@@ -18,12 +18,22 @@
 #include "config.h"
 #endif
 
+#if defined(_WIN32)
+#define _POSIX
+#define __USE_MINGW_ALARM
+#include "win32/win32_compat.h"
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <inttypes.h>
 #include <string.h>
+
+#ifdef HAVE_POLL_H
 #include <poll.h>
+#endif
+
 #include <getopt.h>
 #include <time.h>
 #include <signal.h>
@@ -393,6 +403,11 @@ int main(int argc, char *argv[])
 		printf("infinite runtime - press CTRL-C to abort.\n");
 	}
 
+#if defined(_WIN32)
+	if (signal(SIGINT, sig_handler) == SIG_IGN) signal(SIGINT, SIG_IGN);
+	if (signal(SIGTERM, sig_handler) == SIG_IGN) signal(SIGTERM, SIG_IGN);
+	if (signal(SIGALRM, sig_handler) == SIG_IGN) signal(SIGALRM, SIG_IGN);
+#else
 	struct sigaction sa;
 	sa.sa_handler = &sig_handler;
 	sa.sa_flags = SA_RESTART;
@@ -401,6 +416,7 @@ int main(int argc, char *argv[])
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGTERM, &sa, NULL);
 	sigaction(SIGALRM, &sa, NULL);
+#endif
 
 	printf("\n");
 

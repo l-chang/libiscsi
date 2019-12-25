@@ -1,5 +1,10 @@
 # Generic definitions
-SUBDIRS = lib doc utils
+if MINGW32
+SUBDIRS = win32
+else
+SUBDIRS =
+endif
+SUBDIRS += lib doc utils
 if BUILD_TEST_TOOL
 SUBDIRS += test-tool
 endif

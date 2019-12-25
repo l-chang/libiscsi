@@ -25,6 +25,13 @@
 #include "config.h"
 #endif
 
+#if defined(_WIN32)
+#include "win32/win32_compat.h"
+#include <winsock2.h>
+#else
+#include <strings.h>
+#endif
+
 #ifdef HAVE_SYS_TYPES_H
 #include <sys/types.h>
 #endif
@@ -35,13 +42,6 @@
 
 #ifdef AROS
 #include "aros/aros_compat.h"
-#endif
-
-#if defined(_WIN32)
-#include <winsock2.h>
-#include "win32/win32_compat.h"
-#else
-#include <strings.h>
 #endif
 
 #ifdef HAVE_SYS_SOCKET_H

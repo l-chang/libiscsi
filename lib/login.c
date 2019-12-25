@@ -23,17 +23,17 @@
 #include "config.h"
 #endif
 
+#if defined(_WIN32)
+#include "win32/win32_compat.h"
+#include <winsock2.h>
+#endif
+
 #ifdef HAVE_SYS_TYPES_H
 #include <sys/types.h>
 #endif
 
 #ifdef HAVE_ARPA_INET_H
 #include <arpa/inet.h>
-#endif
-
-#if defined(_WIN32)
-#include <winsock2.h>
-#include "win32/win32_compat.h"
 #endif
 
 #include <stdio.h>

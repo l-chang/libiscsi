@@ -3,6 +3,10 @@ AM_CPPFLAGS = -I${srcdir}/../include "-D_U_=__attribute__((unused))" \
 AM_CFLAGS = $(WARN_CFLAGS)
 LDADD = ../lib/libiscsi.la
 
+if MINGW32
+LDADD += ../win32/libwin32_compat.la
+endif
+
 noinst_PROGRAMS = prog_reconnect prog_reconnect_timeout prog_noop_reply \
 	prog_readwrite_iov prog_timeout prog_read_all_pdus \
 	prog_header_digest

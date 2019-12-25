@@ -35,8 +35,8 @@
 #define TARGET "127.0.0.1:3260"
 
 #if defined(_WIN32)
-#include <winsock2.h>
 #include "win32/win32_compat.h"
+#include <winsock2.h>
 #pragma comment(lib, "ws2_32.lib")
 WSADATA wsaData;
 #else

@@ -28,9 +28,21 @@ THE SOFTWARE.
 #ifdef _WIN32
 #define NO_IPv6 1
 
+#ifndef _SSIZE_T_DEFINED
+#define _SSIZE_T_DEFINED
+#endif
+
+#ifndef _TIMEZONE_DEFINED
+#define _TIMEZONE_DEFINED
+#endif
+
+#ifndef _CRT_GETPID_DEFINED
+#define _CRT_GETPID_DEFINED
+#endif
+
 #include <winsock2.h>
 #include <ws2tcpip.h>
-#include <Ws2ipdef.h>
+#include <ws2ipdef.h>
 #include <basetsd.h>
 #include <io.h>
 #include <malloc.h>
@@ -76,6 +88,16 @@ typedef int socklen_t;
 #define snprintf(a, b, c, ...) _snprintf_s(a, b, b, c, ## __VA_ARGS__)
 #endif
 
+struct timezone {
+    int tz_minuteswest; /* minutes W of Greenwich */
+    int tz_dsttime;     /* type of dst correction */
+};
+
+struct iovec {
+    void *iov_base;
+    size_t iov_len;
+};
+
 int     win32_inet_pton(int af, const char * src, void * dst);
 int     win32_poll(struct pollfd *fds, unsigned int nfsd, int timeout);
 int     win32_gettimeofday(struct timeval *tv, struct timezone *tz);
@@ -83,12 +105,9 @@ ssize_t win32_writev(int fd, const struct iovec *iov, int iovcnt);
 ssize_t win32_readv(int fd, const struct iovec *iov, int iovcnt);
 int     win32_dup2(int oldfd, int newfd);
 
-struct iovec {
-    void *iov_base;
-    size_t iov_len;
-};
-
+#ifndef __GNUC__
 #define inline
+#endif
 
 #endif // _WIN32
 #endif // win32_COMPAT_H_

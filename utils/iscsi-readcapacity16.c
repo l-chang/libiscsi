@@ -16,12 +16,20 @@
    along with this program; if not, see <http://www.gnu.org/licenses/>.
 */
 
+#if defined(_WIN32)
+#include "win32/win32_compat.h"
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <inttypes.h>
 #include <string.h>
+
+#ifdef HAVE_POLL_H
 #include <poll.h>
+#endif
+
 #include <getopt.h>
 #include "iscsi.h"
 #include "scsi-lowlevel.h"

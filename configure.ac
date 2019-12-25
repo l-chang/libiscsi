@@ -24,6 +24,9 @@ case $host in
     ;;
 esac
 
+AM_CONDITIONAL([MINGW32], [test "x$host_os" = 'xmingw32'])
+AS_IF([test "x$host_os" = 'xmingw32'], [AC_CHECK_LIB([ws2_32], [WSACleanup])])
+
 AC_ARG_ENABLE([werror], [AS_HELP_STRING([--disable-werror],
               [Disables building with -Werror by default])])
 
@@ -190,5 +193,6 @@ AC_CONFIG_FILES([Makefile]
 		[test-tool/Makefile]
 		[tests/Makefile]
 		[utils/Makefile]
+		[win32/Makefile]
 		[libiscsi.pc])
 AC_OUTPUT

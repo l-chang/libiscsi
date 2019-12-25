@@ -18,6 +18,14 @@
 #include "config.h"
 #endif
 
+#if defined(_WIN32)
+#include "win32/win32_compat.h"
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#else
+#include <strings.h>
+#endif
+
 #ifdef HAVE_SYS_TYPES_H
 #include <sys/types.h>
 #endif
@@ -31,14 +39,6 @@
 #else
 #define PRIu64 "llu"
 #define PRIx32 "x"
-#endif
-
-#if defined(_WIN32)
-#include <winsock2.h>
-#include <ws2tcpip.h>
-#include "win32/win32_compat.h"
-#else
-#include <strings.h>
 #endif
 
 #include <stdio.h>
